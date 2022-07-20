@@ -7,7 +7,7 @@ COPY . /
 
 WORKDIR /
 
-RUN pip3 install Flask
+RUN pip3 install Flask -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ENTRYPOINT [ "python3" ]
 
