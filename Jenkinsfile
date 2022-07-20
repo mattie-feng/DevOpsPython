@@ -1,7 +1,7 @@
 pipeline {
   agent any
   parameters {
-    string(name:'TAG_NAME', defaultValue: 'v0.0.1', description:'')
+    string(name:'TAG_NAME', defaultValue: 'v0.0.2', description:'')
   }
 
   environment {
