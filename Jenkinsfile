@@ -1,7 +1,7 @@
 pipeline {
   agent any
   parameters {
-    string(name:'TAG_NAME', defaultValue: 'v0.0.3', description:'')
+    string(name:'TAG_NAME', defaultValue: 'v0.0.4', description:'')
   }
 
   environment {
@@ -42,7 +42,7 @@ pipeline {
             sh 'git tag -a $TAG_NAME -m "$TAG_NAME" '
             sh 'git push http://$GIT_USERNAME:$GIT_PASSWORD@github.com/$GITHUB_ACCOUNT/$GITHUB_APP_NAME.git --tags --ipv4'
           }
-          // sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$GITHUB_APP_NAME:$TAG_NAME $REGISTRY/$DOCKERHUB_NAMESPACE/$GITHUB_APP_NAME:$TAG_NAME '
+          // sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
           sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
         }
       }
