@@ -11,7 +11,8 @@ pipeline {
       REGISTRY = 'docker.io'
       DOCKERHUB_NAMESPACE = 'mattie1'
       GITHUB_ACCOUNT = 'mattie-feng'
-      APP_NAME = 'DevOpsPython'
+      GITHUB_APP_NAME = 'DevOpsPython'
+      APP_NAME = 'devops-python'
   }
 
   stages {
@@ -39,9 +40,9 @@ pipeline {
             sh 'git config --global user.email "mattie.feng@feixitek.com" '
             sh 'git config --global user.name "$GITHUB_ACCOUNT" '
             sh 'git tag -a $TAG_NAME -m "$TAG_NAME" '
-            sh 'git push http://$GIT_USERNAME:$GIT_PASSWORD@github.com/$GITHUB_ACCOUNT/DevOpsPython.git --tags --ipv4'
+            sh 'git push http://$GIT_USERNAME:$GIT_PASSWORD@github.com/$GITHUB_ACCOUNT/$GITHUB_APP_NAME.git --tags --ipv4'
           }
-          // sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
+          // sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$GITHUB_APP_NAME:$TAG_NAME $REGISTRY/$DOCKERHUB_NAMESPACE/$GITHUB_APP_NAME:$TAG_NAME '
           sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
         }
       }
