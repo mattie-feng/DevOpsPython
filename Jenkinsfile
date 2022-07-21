@@ -21,7 +21,7 @@ pipeline {
           sh 'docker build -f Dockerfile -t $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME .'
           withCredentials([usernamePassword(passwordVariable : 'DOCKER_PASSWORD' ,usernameVariable : 'DOCKER_USERNAME' ,credentialsId : "$DOCKER_CREDENTIAL_ID" ,)]) {
             sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
-            # sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME'
+            // sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME'
           }
         }
       }
@@ -41,7 +41,7 @@ pipeline {
             sh 'git tag -a $TAG_NAME -m "$TAG_NAME" '
             sh 'git push http://$GIT_USERNAME:$GIT_PASSWORD@github.com/$GITHUB_ACCOUNT/DevOpsPython.git --tags --ipv4'
           }
-          # sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
+          // sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
           sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
         }
       }
