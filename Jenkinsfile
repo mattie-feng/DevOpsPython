@@ -1,7 +1,7 @@
 pipeline {
   agent any
   parameters {
-    string(name:'TAG_NAME', defaultValue: 'v0.0.2', description:'')
+    string(name:'TAG_NAME', defaultValue: 'v0.0.3', description:'')
   }
 
   environment {
@@ -15,13 +15,13 @@ pipeline {
   }
 
   stages {
-    stage ('build & push') {
+    stage ('build') {
       steps {
         container ('base') {
           sh 'docker build -f Dockerfile -t $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME .'
           withCredentials([usernamePassword(passwordVariable : 'DOCKER_PASSWORD' ,usernameVariable : 'DOCKER_USERNAME' ,credentialsId : "$DOCKER_CREDENTIAL_ID" ,)]) {
             sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
-            sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME'
+            # sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME'
           }
         }
       }
@@ -41,7 +41,7 @@ pipeline {
             sh 'git tag -a $TAG_NAME -m "$TAG_NAME" '
             sh 'git push http://$GIT_USERNAME:$GIT_PASSWORD@github.com/$GITHUB_ACCOUNT/DevOpsPython.git --tags --ipv4'
           }
-          sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
+          # sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
           sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
         }
       }
