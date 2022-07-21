@@ -11,7 +11,7 @@ pipeline {
       REGISTRY = 'docker.io'
       DOCKERHUB_NAMESPACE = 'mattie1'
       GITHUB_ACCOUNT = 'mattie-feng'
-      APP_NAME = 'devops-python-self-defined'
+      APP_NAME = 'DevOpsPython'
   }
 
   stages {
