@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  parameters {
-    string(name:'TAG_NAME_BASE', defaultValue: '', description:'')
-  }
 
   environment {
       DOCKER_CREDENTIAL_ID = 'devops-docker'
@@ -13,7 +10,7 @@ pipeline {
       GITHUB_ACCOUNT = 'mattie-feng'
       GITHUB_APP_NAME = 'DevOpsPython'
       APP_NAME = 'devops-python'
-      TAG_NAME = 'v0.1.2'
+      TAG_NAME = 'v0.1.3'
   }
 
   stages {
