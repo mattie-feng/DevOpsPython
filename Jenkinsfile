@@ -10,7 +10,7 @@ pipeline {
       GITHUB_ACCOUNT = 'mattie-feng'
       GITHUB_APP_NAME = 'DevOpsPython'
       APP_NAME = 'devops-python'
-      TAG_NAME = 'v0.1.3'
+      TAG_NAME = 'v0.1.4'
   }
 
   stages {
