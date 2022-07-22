@@ -1,7 +1,7 @@
 pipeline {
   agent any
   parameters {
-    string(name:'TAG_NAME', defaultValue: 'v0.1.1', description:'')
+    string(name:'TAG_NAME_BASE', defaultValue: '', description:'')
   }
 
   environment {
@@ -13,6 +13,7 @@ pipeline {
       GITHUB_ACCOUNT = 'mattie-feng'
       GITHUB_APP_NAME = 'DevOpsPython'
       APP_NAME = 'devops-python'
+      TAG_NAME = 'v0.1.2'
   }
 
   stages {
