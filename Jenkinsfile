@@ -10,7 +10,7 @@ pipeline {
       GITHUB_ACCOUNT = 'mattie-feng'
       GITHUB_APP_NAME = 'DevOpsPython'
       APP_NAME = 'devops-python'
-      TAG_NAME = 'v0.1.4'
+      TAG_NAME = 'v0.1.5'
   }
 
   stages {
@@ -26,11 +26,6 @@ pipeline {
       }
     }
     stage('push with tag') {
-      when {
-        expression {
-          return params.TAG_NAME =~ /v.*/
-        }
-      }
       steps {
         container ('base') {
           input(id: 'release-image-with-tag', message: 'release image with tag?')
