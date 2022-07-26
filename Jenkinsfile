@@ -10,7 +10,7 @@ pipeline {
       GITHUB_ACCOUNT = 'mattie-feng'
       GITHUB_APP_NAME = 'DevOpsPython'
       APP_NAME = 'devops-python'
-      TAG_NAME = 'v0.1.12'
+      TAG_NAME = 'v0.1.13'
   }
 
   stages {
@@ -45,7 +45,7 @@ pipeline {
         container ('base') {
           withCredentials([
           kubeconfigFile(
-            credentialsId: env.KUBECONFIG_CREDENTTIAL_ID,
+            credentialsId: env.KUBECONFIG_CREDENTIAL_ID,
             variable: 'KUBECONFIG')
           ]) {
             sh '''
