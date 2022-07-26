@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: devops-service
+
+spec:
+  type: NodePort
+  selector:
+    app: devops-python
+  ports:
+    - nodePort: 31088
+      port: 5000
+      targetPort: 5000
