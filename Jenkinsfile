@@ -40,7 +40,6 @@ pipeline {
         }
       }
     }
-  }
     stage('deployment') {
       steps {
         container ('base') {
@@ -57,4 +56,5 @@ pipeline {
         }
     }
   }
+}
 }
