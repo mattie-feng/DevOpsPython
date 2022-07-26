@@ -10,7 +10,7 @@ pipeline {
       GITHUB_ACCOUNT = 'mattie-feng'
       GITHUB_APP_NAME = 'DevOpsPython'
       APP_NAME = 'devops-python'
-      TAG_NAME = 'v0.1.9'
+      TAG_NAME = 'v0.1.10'
   }
 
   stages {
@@ -49,8 +49,8 @@ pipeline {
             variable: 'KUBECONFIG')
           ]) {
             sh '''
-                 envsubst <deploy/devops-deployment.yaml> | kubectl apply -f -
-                 envsubst <deploy/devops-service.yaml> | kubectl apply -f -
+                 envsubst < deploy/devops-deployment.yaml | kubectl apply -f -
+                 envsubst < deploy/devops-service.yaml | kubectl apply -f -
              '''
           }
         }
