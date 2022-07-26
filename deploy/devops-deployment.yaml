@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops-python
+  template:
+    metadata:
+      labels:
+        app: devops-python
+    spec:
+      nodeName: mattie196
+      containers:
+      - name: devops-python
+        image: $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
