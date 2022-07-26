@@ -10,7 +10,7 @@ pipeline {
       GITHUB_ACCOUNT = 'mattie-feng'
       GITHUB_APP_NAME = 'DevOpsPython'
       APP_NAME = 'devops-python'
-      TAG_NAME = 'v0.1.7'
+      TAG_NAME = 'v0.1.8'
   }
 
   stages {
@@ -35,26 +35,26 @@ pipeline {
             sh 'git tag -a $TAG_NAME -m "$TAG_NAME" '
             sh 'git push http://$GIT_USERNAME:$GIT_PASSWORD@github.com/$GITHUB_ACCOUNT/$GITHUB_APP_NAME.git --tags --ipv4'
           }
-          // sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
-          // sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
+        // sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
+        // sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$TAG_NAME '
         }
       }
     }
     stage('deployment') {
       steps {
         container ('base') {
-         withCredentials([
+          withCredentials([
           kubeconfigFile(
             credentialsId: env.KUBECONFIG_CREDENTTIAL_ID,
             variable: 'KUBECONFIG')
           ]) {
-             sh '''
+            sh '''
                  envsubst <deploy/devops-deployment.yaml> | kubectl apply -f -
                  envsubst <deploy/devops-service.yaml> | kubectl apply -f -
              '''
           }
         }
+      }
     }
   }
-}
 }
