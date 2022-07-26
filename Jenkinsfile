@@ -41,7 +41,7 @@ pipeline {
       }
     }
   }
-    stage('') {
+    stage('deployment') {
       steps {
         container ('base') {
          withCredentials([
