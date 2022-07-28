@@ -1,13 +1,17 @@
-FROM ubuntu:18.04
+FROM alpine
+RUN echo "https://mirrors.aliyun.com/alpine/v3.6/main/" > /etc/apk/repositories
 
-RUN apt-get update -y
-RUN apt-get install -y python3-pip
+RUN apk update
+RUN apk add python3
+RUN python3 -m pip install -U pip
+RUN pip3 install --upgrade pip -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com
+
 
 COPY . /
 
 WORKDIR /
 
-RUN pip3 install Flask -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN python3 -m pip install Flask -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ENTRYPOINT [ "python3" ]
 
